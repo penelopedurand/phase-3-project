@@ -1,0 +1,15 @@
+class WorldsController < ApplicationController
+
+    #Worlds (world list) route
+  get "/worlds" do
+    worlds_page = World.all
+    worlds_page.to_json
+  end
+
+  #Returns individual world
+  get "/worlds/:id" do
+    individual_world = World.find(params[:id])
+    individual_world.to_json
+  end
+
+end
