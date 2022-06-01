@@ -1,7 +1,7 @@
 class WorldsController < ApplicationController
 
     #Worlds (world list) route
-  get "/worlds" do
+  get "/worlds/" do
     serialize(World.all)
   end
 
