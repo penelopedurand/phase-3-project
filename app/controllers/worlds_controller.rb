@@ -1,3 +1,5 @@
+require "pry"
+
 class WorldsController < ApplicationController
 
     #Worlds (world list) route
@@ -8,6 +10,28 @@ class WorldsController < ApplicationController
   #Returns individual world
   get "/worlds/:id" do
     world = World.find(params[:id])
+    serialize(world)
+  end
+
+  #Post individual world
+  post "/worlds/" do 
+    world = World.create(name_of_world: params[:name_of_world], discovered_year: params[:discovered_year], galaxy_id: params[:galaxy_id])
+    world.to_json
+    # serialize(World.create(world_params))
+  end
+
+  #Update individual world
+  patch "/worlds/:id" do
+    world = World.find(params[:id])
+    world.update(name_of_world: params[:name_of_world], discovered_year: params[:discovered_year])
+    world.to_json
+    # serialize(world)
+  end
+
+ #Deletes individual worlds
+  delete "/worlds/:id" do 
+    world = World.find(params[:id])
+    world.destroy
     serialize(world)
   end
 

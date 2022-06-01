@@ -11,6 +11,21 @@ class RegionsController < ApplicationController
     serialize(region)
   end
 
+ #Post individual region
+  post "/regions/" do 
+    region = Region.create(name: params[:name], chief: params[:chief], weather_person: params[:weather_person], prominent_species: params[:prominent_species], population: params[:population], world_id: params[:world_id], industrialized: params[:industrialized])
+    region.to_json
+  end
+
+  #Update individual region
+  patch "/regions/:id" do
+    region = Region.find(params[:id])
+    region.update(name: params[:name], chief: params[:chief], weather_person: params[:weather_person], prominent_species: params[:prominent_species], population: params[:population], world_id: params[:world_id], industrialized: params[:industrialized])
+    region.to_json
+    # serialize(world)
+  end
+
+
   #Deletes individual regions
   delete "/regions/:id" do 
     region = Region.find(params[:id])
