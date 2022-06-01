@@ -13,3 +13,7 @@ use Rack::JSONBodyParser
 
 # Our application
 run ApplicationController
+
+#if you comment these out, the / should work
+use RegionsController
+use WorldsController
