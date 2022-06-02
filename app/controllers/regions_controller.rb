@@ -1,17 +1,17 @@
 class RegionsController < ApplicationController
 
-    #Region route (lists all regions)
+  #Read all regions
   get "/regions/" do
     serialize(Region.all)
   end
 
-  #Returns individual region
+  #Read individual regions
   get "/regions/:id" do
     region = Region.find(params[:id])
     serialize(region)
   end
 
- #Post individual region
+  #Create individual region
   post "/regions/" do 
     region = Region.create(name: params[:name], chief: params[:chief], weather_person: params[:weather_person], prominent_species: params[:prominent_species], population: params[:population], world_id: params[:world_id], industrialized: params[:industrialized])
     region.to_json
@@ -22,24 +22,17 @@ class RegionsController < ApplicationController
     region = Region.find(params[:id])
     region.update(name: params[:name], chief: params[:chief], weather_person: params[:weather_person], prominent_species: params[:prominent_species], population: params[:population], world_id: params[:world_id], industrialized: params[:industrialized])
     region.to_json
-    # serialize(world)
   end
 
 
-  #Deletes individual regions
+  #Delete individual region
   delete "/regions/:id" do 
     region = Region.find(params[:id])
     region.destroy
     serialize(region)
   end
 
-#   post "/regions" do
-#     binding.pry
-#     # individual_region = Region.create(name:params[:name], chief:params[:chief], weather_person:params[:weather_person], prominent_species:params[:prominent_species], population:params[:population], world:params[:world], industrialized:params[:industrialized])
-#     # individual_region.to_json
-#   end
-
-private
+  private
 
   def region_params
     allowed_params= %w(name, chief, weather_person, prominent_species, population, world, industrialized)
@@ -47,9 +40,7 @@ private
   end
 
   def serialize(region)
-    region.to_json(
-      # methods: :days_on_bestseller_list
-    )
+    region.to_json()
   end
 
 
