@@ -9,6 +9,7 @@ class WorldsController < ApplicationController
 
   #Read individual world
   get "/worlds/:id" do
+
     world = World.find(params[:id])
     serialize(world)
   end
