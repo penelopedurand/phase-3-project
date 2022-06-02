@@ -2,22 +2,21 @@ require "pry"
 
 class WorldsController < ApplicationController
 
-    #Worlds (world list) route
+  #Read all worlds
   get "/worlds/" do
     serialize(World.all)
   end
 
-  #Returns individual world
+  #Read individual world
   get "/worlds/:id" do
     world = World.find(params[:id])
     serialize(world)
   end
 
-  #Post individual world
+  #Create individual world
   post "/worlds/" do 
     world = World.create(name_of_world: params[:name_of_world], discovered_year: params[:discovered_year], galaxy_id: params[:galaxy_id])
     world.to_json
-    # serialize(World.create(world_params))
   end
 
   #Update individual world
@@ -25,10 +24,9 @@ class WorldsController < ApplicationController
     world = World.find(params[:id])
     world.update(name_of_world: params[:name_of_world], discovered_year: params[:discovered_year])
     world.to_json
-    # serialize(world)
   end
 
- #Deletes individual worlds
+ #Delete individual world
   delete "/worlds/:id" do 
     world = World.find(params[:id])
     world.destroy
@@ -43,9 +41,7 @@ class WorldsController < ApplicationController
   end
 
   def serialize(world)
-    world.to_json(
-      # methods: :days_on_bestseller_list
-    )
+    world.to_json()
   end
 
 end
